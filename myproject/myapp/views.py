@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .serializers import MyUserSerializer
-from .models import myUser
+from .serializers import MyUserSerializer,MyTodoSerializer
+from .models import myUser,MyTodo
 from rest_framework import mixins, generics
 
 @api_view(["GET", "POST"])
@@ -39,19 +39,25 @@ def updateAndDelete(request, id):
 class UserGetAndPOST(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
     queryset = myUser.objects.all()
     serializer_class = MyUserSerializer
-    def get(self,request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-    def post(self,request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+    # def get(self,request, *args, **kwargs):
+    #     return self.list(request, *args, **kwargs)
+    # def post(self,request, *args, **kwargs):
+    #     return self.create(request, *args, **kwargs)
     
 
 class UserGETAndPUTAndDelete(generics.RetrieveUpdateDestroyAPIView):
     queryset = myUser.objects.all()
     serializer_class = MyUserSerializer
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
+    # def get(self, request, *args, **kwargs):
+    #     return self.retrieve(request, *args, **kwargs)
+    # def put(self, request, *args, **kwargs):
+    #     return self.update(request, *args, **kwargs)
+    # def delete(self, request, *args, **kwargs):
+    #     return self.destroy(request, *args, **kwargs)
     
+class TodoGetAndPutAndDelete(generics.RetrieveUpdateDestroyAPIView):
+    queryset = MyTodo.objects.all()
+    serializer_class = MyTodoSerializer 
+class TodoCreateAndRetrieve(generics.ListCreateAPIView):
+    queryset = MyTodo.objects.all()
+    serializer_class = MyTodoSerializer
