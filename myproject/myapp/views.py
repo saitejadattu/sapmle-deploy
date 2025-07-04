@@ -13,12 +13,12 @@ from django.contrib.auth.models import User
 
 
 class TodoGetAndPutAndDelete(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     queryset = MyTodo.objects.all()
     serializer_class = MyTodoSerializer
 
 class TodoCreateAndRetrieve(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     queryset = MyTodo.objects.all()
     serializer_class = MyTodoSerializer
 
@@ -38,7 +38,7 @@ def register(request):
 
 
 @api_view(["GET"])
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def getUserTodos(request, user_id):
     user_todos = MyTodo.objects.filter(user=user_id)
     serializer = MyTodoSerializer(user_todos, many=True)
