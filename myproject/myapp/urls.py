@@ -12,4 +12,5 @@ urlpatterns=[
     path('register/', views.register),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('get_user_todos/<int:user_id>/', views.getUserTodos),
+    path("getTodos/", views.getTodos),
 ]
